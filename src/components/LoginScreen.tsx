@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Badge, Lock, ArrowRight, Sparkles, Smartphone, Sofa } from 'lucide-react';
 
 interface LoginScreenProps {
-  onLogin: (studentId: string, nickname: string) => void;
+  onLogin: (studentId: string, passwordValue: string) => { success: boolean; error?: string };
   onNavigateToRegister: () => void;
 }
 
@@ -22,8 +22,11 @@ export default function LoginScreen({ onLogin, onNavigateToRegister }: LoginScre
       return;
     }
     setError('');
-    // Mock successful sign in
-    onLogin(studentId, '小明');
+    
+    const result = onLogin(studentId, password);
+    if (!result.success) {
+      setError(result.error || '登入失敗');
+    }
   };
 
   return (

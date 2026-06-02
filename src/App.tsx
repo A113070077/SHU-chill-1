@@ -31,6 +31,14 @@ import {
   ChevronRight, ArrowLeft, CheckCircle2, History, RotateCcw, MessageSquare, Plus, Check, Star
 } from 'lucide-react';
 
+interface RegisteredUser {
+  studentId: string;
+  realName: string;
+  nickname: string;
+  email: string;
+  passwordValue: string;
+}
+
 export default function App() {
   // Authentication & Profile states
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
@@ -40,6 +48,32 @@ export default function App() {
     const saved = localStorage.getItem('shuchill_user');
     return saved ? JSON.parse(saved) : defaultUser;
   });
+
+  // Registered users state
+  const [registeredUsers, setRegisteredUsers] = useState<RegisteredUser[]>(() => {
+    const saved = localStorage.getItem('shuchill_registered_users');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // Fallback
+      }
+    }
+    return [
+      {
+        studentId: '110123456',
+        realName: '王小明',
+        nickname: '小明',
+        email: '110123456@shu.edu.tw',
+        passwordValue: '12345678',
+      }
+    ];
+  });
+
+  // Sync registered users to localStorage
+  useEffect(() => {
+    localStorage.setItem('shuchill_registered_users', JSON.stringify(registeredUsers));
+  }, [registeredUsers]);
 
   // Screen State Machine
   const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'main'>('login');
@@ -166,27 +200,62 @@ export default function App() {
   };
 
   // Actions
-  const handleLogin = (studentId: string, nickname: string) => {
+  const handleLogin = (studentId: string, passwordValue: string): { success: boolean; error?: string } => {
+    const sId = studentId.trim();
+    const pVal = passwordValue.trim();
+    
+    const foundUser = registeredUsers.find(u => u.studentId === sId);
+    if (!foundUser) {
+      return { success: false, error: '此學號尚未註冊，請先註冊帳號' };
+    }
+    
+    if (foundUser.passwordValue !== pVal) {
+      return { success: false, error: '密碼不正確，請重新輸入' };
+    }
+
     setUser(prev => ({
       ...prev,
-      studentId: studentId.trim(),
-      nickname: nickname.trim(),
+      studentId: foundUser.studentId,
+      realName: foundUser.realName,
+      nickname: foundUser.nickname,
     }));
     setIsLoggedIn(true);
     setCurrentScreen('main');
+    return { success: true };
   };
 
-  const handleRegister = (studentId: string, realName: string, nickname: string, email: string) => {
+  const handleRegister = (studentId: string, realName: string, nickname: string, email: string, passwordValue: string): { success: boolean; error?: string } => {
+    const sId = studentId.trim();
+    const rName = realName.trim();
+    const nName = nickname.trim();
+    const mail = email.trim();
+    const pVal = passwordValue.trim();
+
+    if (registeredUsers.some(u => u.studentId === sId)) {
+      return { success: false, error: '此學號已註冊過，學號不可重複註冊！' };
+    }
+
+    const newUserObj: RegisteredUser = {
+      studentId: sId,
+      realName: rName,
+      nickname: nName,
+      email: mail,
+      passwordValue: pVal,
+    };
+
+    setRegisteredUsers(prev => [...prev, newUserObj]);
+
     setUser({
-      studentId,
-      realName,
-      nickname,
+      studentId: sId,
+      realName: rName,
+      nickname: nName,
       avatarUrl: defaultUser.avatarUrl,
       notifyEnabled: true,
       privateEnabled: false,
     });
     setIsLoggedIn(true);
     setCurrentScreen('main');
+    return { success: true };
   };
 
   const handleLogout = () => {

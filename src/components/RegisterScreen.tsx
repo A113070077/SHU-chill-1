@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, Eye, EyeOff } from 'lucide-react';
 
 interface RegisterScreenProps {
-  onRegister: (studentId: string, realName: string, nickname: string, email: string) => void;
+  onRegister: (studentId: string, realName: string, nickname: string, email: string, passwordVal: string) => { success: boolean; error?: string };
   onNavigateToLogin: () => void;
 }
 
@@ -32,8 +32,12 @@ export default function RegisterScreen({ onRegister, onNavigateToLogin }: Regist
       return;
     }
     setError('');
+    
     // Successful register
-    onRegister(studentId, realName, nickname, email);
+    const result = onRegister(studentId, realName, nickname, email, password);
+    if (!result.success) {
+      setError(result.error || '註冊失敗');
+    }
   };
 
   return (
