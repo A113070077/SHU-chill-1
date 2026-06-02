@@ -1,0 +1,315 @@
+import { Room, Booking, FlashGroup, Notification, UserProfile, ChatMessage } from './types';
+
+export const defaultUser: UserProfile = {
+  studentId: '110123456',
+  realName: '王小明',
+  nickname: '小明',
+  avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6QHzNaFVmiL91e8_zSpatNfRjTfg0NKS3zWR0KZXVGEVmltl2k1Tw_tHHCdRVgclufqe9-inbAJ5W2gffr9KxOMyAIGEL5w7vnJkz1w-90k1mtq7TmE3bv0-9mbO4sDiSD-bmi5d7jQtYN5YAeM9yQXyat8j7722HXaNzrBBEMbL1ltZCY8kt08k2nV4-Ss7Dgaot_rmqxhpkGHDNLupOoldm7VfHVXeslUich9i_lRYBUYKRA7zxC4qHFVJJm5wrzQYX7YN_QOkR',
+  notifyEnabled: true,
+  privateEnabled: false,
+};
+
+export const presetRooms: Room[] = [
+  {
+    id: 'r402',
+    name: '舍我樓 R402',
+    buildingAddress: '世新大學 舍我樓 4樓',
+    buildingKey: 'she-wo',
+    floor: '4F',
+    type: '討論室',
+    capacity: '可容納 4-6 人',
+    status: 'green',
+    amenities: ['插座', '大螢幕', 'WiFi', '可交談'],
+    nextAvailableTime: '立即',
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnbTBNbCeZZtlbSbHvST3KSfXvyOPtj0MbiPUbeBA1WN5VBmJ8iohGI1foB4xCqL6QylU4VG6RL5QaOznbsvEvtNFsJPIlazlfvkgBgfj2JFEOycShUUEYhy2GRI0fLP3Vp4RWyxQJJ69qZAMvW1su_6Eddhdp8Gw4AeNXBilS1PBWcNuGhopBp1-b0GR2P0AVSTmhKDd185m3UU5KdpLciRPyltoM1I2urJPzrsUquvNiGqKkit1tc_GasNwm4LW_EWiPA_gVG-hV',
+    description: '明亮且富有現代感的空間。大片落地窗提供充足光線，並配有舒適座椅及大白板，非常適合小組創意討論。',
+  },
+  {
+    id: 's204',
+    name: '舍我樓 S204',
+    buildingAddress: '世新大學 舍我樓 2樓',
+    buildingKey: 'she-wo',
+    floor: '2F',
+    type: '靜音區',
+    capacity: '單人座 12 位',
+    status: 'green',
+    amenities: ['插座', 'WiFi'],
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnbTBNbCeZZtlbSbHvST3KSfXvyOPtj0MbiPUbeBA1WN5VBmJ8iohGI1foB4xCqL6QylU4VG6RL5QaOznbsvEvtNFsJPIlazlfvkgBgfj2JFEOycShUUEYhy2GRI0fLP3Vp4RWyxQJJ69qZAMvW1su_6Eddhdp8Gw4AeNXBilS1PBWcNuGhopBp1-b0GR2P0AVSTmhKDd185m3UU5KdpLciRPyltoM1I2urJPzrsUquvNiGqKkit1tc_GasNwm4LW_EWiPA_gVG-hV',
+    description: '極致寧靜的個人自習與閱讀空間，提供寬敞桌面、獨立護眼檯燈，以及一對一獨立插座。本區全時段限制音量，請勿交談。',
+  },
+  {
+    id: 'm101',
+    name: '管院大樓 M101',
+    buildingAddress: '管院大樓 1F - 共享空間 (世新大學管理學院)',
+    buildingKey: 'guan-yuan',
+    floor: '1F',
+    type: '討論室',
+    capacity: '可容納 4-6 人',
+    status: 'yellow',
+    amenities: ['WiFi', '插座', '可交談'],
+    nextAvailableTime: '14:00',
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFePocRNo4UXvYETsyQHWEtBDR5SE6LwLtq7b3tcW0gbVCA3bUu-BrbEg1lX-URXyJpv54hG2nIKAqCaT9K8lJ_UvlzjRT_okE5Q_zjb_DA0-d3DP2rbQjRq-eqTvb2hRMOPsTBEutmYL4mWdXRgNQSZf_8a02iSSTCPuiROwEnDIS4GbSGqP-RCLoisA9ggBrXEuo_FXFTRNHZ8yLHGJcD0UvicoIKj6LHrVD3buzFcbwGSL5OiQmE2me9jRN7gQWW2TYd3w7pFln',
+    description: '世新大學管理學院1樓的熱門討論空間，配備多功能充電專區及寬頻無線網路。',
+  },
+  {
+    id: 'm_sofa',
+    name: '管院大樓 1F 沙發休憩區',
+    buildingAddress: '管院大樓 1F (世新大學管理學院)',
+    buildingKey: 'guan-yuan',
+    floor: '1F',
+    type: '沙發區',
+    capacity: '開放式空間 20+人',
+    status: 'yellow',
+    amenities: ['舒適沙發', '可飲食'],
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFePocRNo4UXvYETsyQHWEtBDR5SE6LwLtq7b3tcW0gbVCA3bUu-BrbEg1lX-URXyJpv54hG2nIKAqCaT9K8lJ_UvlzjRT_okE5Q_zjb_DA0-d3DP2rbQjRq-eqTvb2hRMOPsTBEutmYL4mWdXRgNQSZf_8a02iSSTCPuiROwEnDIS4GbSGqP-RCLoisA9ggBrXEuo_FXFTRNHZ8yLHGJcD0UvicoIKj6LHrVD3buzFcbwGSL5OiQmE2me9jRN7gQWW2TYd3w7pFln',
+    description: '輕鬆隨意的開放式沙發座位區，可與同學在此放鬆、玩手遊或吃東西，現場人潮適中（約65%）。',
+  },
+  {
+    id: 'lib_silent',
+    name: '世新圖書館 3F 靜音閱讀區',
+    buildingAddress: '世新大學 圖書館 3樓',
+    buildingKey: 'library',
+    floor: '3F',
+    type: '靜音區',
+    capacity: '座位 A-12',
+    status: 'green',
+    amenities: ['插座', '大螢幕', 'WiFi'],
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDW2OUACN4zuu1eyhrlWWK6BGdiDN0IKv6-e0ekk9HxyDNWyuT2qp0LF9RCRKxge7q4xZBTMQPCrZC15MrhFapza3qh9rGhgrXXVdFS5RlxreUcCFOUvVWspafhH3wuMPCj56QoGwUXC99AJEgussh7z1Z5ZyKfmGVSN4YjXtNhAGKHBE74ZBQAXbCIBKz_i9xE4tQ_gcA7o9L2TvH6i0_RV_0k2KPvk1l1K16r8RPP_NzgznIZTMMShHVOi2BGUVVqKnCc3WUEFK-b',
+    description: '位於圖書館3樓，極度安靜的單人座位區，座位旁均附有專用插座與隔板，讓你心無旁騖享受個人閱讀時光。',
+  },
+  {
+    id: 'lib_b1',
+    name: '世新圖書館 B1 討論室 D',
+    buildingAddress: '世新大學 圖書館 B1',
+    buildingKey: 'library',
+    floor: 'B1',
+    type: '討論室',
+    capacity: '可容納 6-8 人',
+    status: 'green',
+    amenities: ['插座', 'WiFi', '大螢幕', '可交談'],
+    imageUrl: 'https://lh3.googleusercontent.com/AB6AXuDnjgKCBLEHK2EEcy_ubKOi7pIpRnDQtKIEnewJfmQ4GxmSc1-0x4OleNEGwkUiIjscCUehzaPrxoqdZlEEvzC5YCN_mMHmyRXKgyn4MdKmcnJzLC5eFa8KYGRrt_JAN9JiHCS4hmtuQVClA_4Vmt-oxwh7IvaM-mrQmrAG9YoptuJO9S6TtgaIBMTn9lApJo2rZSILaYMVYo34fYBSw25HQXROqZ6xVWxkcM7sX_0sEgW-RPKNU5Q8IyV66XZ2Qqh5SUjFJ5WTPeXd',
+    description: '寬敞的多功能小組討論空間，備有高解析度顯示器。本區域不提供飲食，請保持潔淨。',
+  },
+  {
+    id: 'comm_3f',
+    name: '傳播大廈 3F 交流區',
+    buildingAddress: '世新大學 傳播大廈 3F 交流區',
+    buildingKey: 'all',
+    floor: '3F',
+    type: '沙發區',
+    capacity: '開放式空間 15+人',
+    status: 'yellow',
+    amenities: ['WiFi', '可飲食', '舒適沙發'],
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBGmoSvptHQOiYlQDnbGQkjcD7rSj9E3Z8nNhv6b2kTApUzG5HjW-_R03atiklpeJNciW1z1Aj_lex_RvlLVcFbdGqCL396LG2OfbBJLv2w-OZ4IVkS-4kMdz-0SxKhGaGR2QCCjzDFSGb2iHEwI4rww8RPav0iBQlTYtz_acE74qxNBPOZOB8_gdB2quJ62l31VmUOjymXIOn5cryogf-7050IkceLJBEPWNCHHq39GWoc2Tm1HM6OXljSUpEG1CH-MhzjOnngBpaW',
+    description: '世新大學傳播大廈3樓的熱鬧活動交誼廳。同學們常在此聚會、玩掌機、分享課後點滴。',
+  }
+];
+
+export const defaultBookings: Booking[] = [
+  {
+    id: 'b1',
+    roomId: 'lib_silent',
+    roomName: '圖書館 3F 靜音閱讀區',
+    roomLocation: '座位 A-12 • 附插座',
+    date: '今天',
+    timeSlot: '14:00 - 16:00',
+    duration: 2,
+    seats: '座位 A-12',
+    details: '附插座',
+    qrCodeUrl: '#',
+    status: 'active',
+    facilityTags: ['插座', '大螢幕', 'WiFi']
+  },
+  {
+    id: 'b2',
+    roomId: 'lib_b1',
+    roomName: '綜合大樓 2F 討論室 B',
+    roomLocation: '討論座位 B2',
+    date: '10/12 (三)',
+    timeSlot: '10:00 - 12:00',
+    duration: 2,
+    seats: '座位 B-2',
+    details: '近落地窗',
+    qrCodeUrl: '#',
+    status: 'completed',
+    facilityTags: ['WiFi', '可交談']
+  },
+  {
+    id: 'b3',
+    roomId: 'lib_silent',
+    roomName: '圖書館 1F 沙發區',
+    roomLocation: '沙發 D-04',
+    date: '10/10 (一)',
+    timeSlot: '15:00 - 17:00',
+    duration: 2,
+    seats: '沙發 D-4',
+    details: '可進食',
+    qrCodeUrl: '#',
+    status: 'completed',
+    facilityTags: ['舒適沙發', '可飲食']
+  }
+];
+
+export const defaultFlashGroups: FlashGroup[] = [
+  {
+    id: 'f1',
+    title: 'Switch 打馬利歐賽車',
+    category: '遊戲娛樂',
+    categoryEmoji: '🎮',
+    time: '今天 14:00 - 15:00',
+    location: '傳播大廈 3F 交流區 (微吵鬧)',
+    buildingAddress: '傳播大廈 1F - 3F Lobby',
+    description: '空堂好無聊呀！在 3 樓落地窗旁的沙發區。自備主機或一起共用皆可，直接來戰，輸的請飲料！新手神人都歡迎友善哈拉！',
+    maxParticipants: 4,
+    currentParticipants: 3,
+    members: [
+      {
+        name: '小明',
+        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDgMQWcdMeJXqgt2d7WwKKN9hXcFscgZ51YqoDVEGqMTQ74ei4CY18-TT-yHDLzU38ziqcImnKTWyDL9F4VVTl91NriJttKIW2jXUs_EHj0WicsnACqnMCkbS3i_hndoZSPqgLXB_JjiwN_K4GwswafllYOYkZ1mPypmzPYbzIKBJ7S9AXAfCtO4jKH7swLx8uLxw6NU1EdWRpTEn88iE26McXyMr5rwc35MaQ2GjHeAkJCscjNVWp98r06x38In4t8ZAmeGXNkEnWR',
+        isCreator: true,
+      },
+      {
+        name: '阿強',
+        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCZooWErYW0mIoxU3cpTPohcmT1Cr8ClR3CRRVu2xh5R1g0G9utrrHEusrBJ5JzkD8cIaXqn4o89DoPmpr92sLjzUXx3-g9TQgXaiWh_yDiNW7LzoErV8Zuuhjlaz8xVpVhcBqbwtpAly49YQh0nhqhCoxzFNrux2o5pIc723Kdq5A7UuZJME6kVxs1nL26001cyv8GI-HIlMiHcfxhga7TSeOAwHgjLNksSnZFAK2Dwn8koYBxi-Kq-RsnJomDFQ4l74YdCAsTqNSn',
+        isCreator: false,
+      },
+      {
+        name: '小華',
+        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAhEbk13lECRPJ7RShTBGzP_qBrBiKXWefPnoXjco62nz6D3Sfy5pnK-Qqrebp8wni1fdUae5vF_3mNCHoyUghP7LKKGvlyf0sDdPAgrkNLta_Vg3-NqZzVvhL4J8WrDtJH5A5DM7wUG-9GAw_v28_79A1B575H3Um5l34BzUn4ga68gEUfJ8vVlc5hgwlhVvsfC4drVkkA29s541XSHUDfUkhfh8Iiu9GxD9HydDOAIqppLVy4WSb6mM_QNgep6QvzEGfu_r6G_iEP',
+        isCreator: false,
+      }
+    ],
+    facilityTags: ['WiFi', '可交談', '舒適沙發'],
+    mapUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuALhEkvuqGMcem0Dh6Wl5IT2f7xToBTt-tN51_cl4fAMLURwTJor9VJ_SAgTg_yUy78Ng5EXu-c3VJI4oKc0TVZDOLEe9-2qOlxGT-M9IOJpl9tiFrfUx-M6_7AACvE7Hn_HtLnf88Bt5LVmsYIUrGydUnVT22AZIBp2bMPn-V8nSBQxRSd4empK6oMR2nioWtsQEbKepYSjU-FRNw8ObzHdI8Ncf14Y6sHpRBoTlPlvrqRSA-UtsixbW5yMkWBllF670Mo3o-5Kh8L'
+  },
+  {
+    id: 'f2',
+    title: '阿瓦隆 - 誠徵心機鬼',
+    category: '桌遊聚會',
+    categoryEmoji: '🎲',
+    time: '今天 14:00 - 15:00',
+    location: '圖書館 B1 討論室 D (不可飲食)',
+    buildingAddress: '世新大學 圖書館 B1',
+    description: '阿瓦隆歡樂推理解密局，缺兩個邏輯強大、演技一流的心機鬼。本桌桌遊新手極友善，會手把手幫忙帶規則，歡迎直接插位。',
+    maxParticipants: 8,
+    currentParticipants: 6,
+    members: [
+      {
+        name: '小芳',
+        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDFQBSJ9gDTD3eXjDb6EhXI-zvS4QZ6oyj8WGYeQNflKrAYgwDMjwtSiJXWy1wPXIxG2yx-KpqL91QjXhfFvAX-4LVXba2uYbBKLzl42lQHn29JUNXh9yfkCgdHrruLRnak69H-udfWt2ucKngR4Lmipkd5zOjv5R-uvptG6Tc4iVPmAo2FUyASxBeLfQCgAuCc-himJXTKAUaVdNejKpFtqosE7fN2HRAbGhn7ZymWx2AMpOZXKqv2aj3VRRTZWTx72uyALdnNVWbc',
+        isCreator: true,
+      },
+      {
+        name: '豪哥',
+        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnb5gLmdJ9bOlEtRKHcclZSJEMPDbCs4rgQNt-UmNEi5RVZ26C1MTdOfy_P3UmlQl--KDxYWBP3zz08a_PG9_WgRPicj8KnDAWncwd2fKKdrNRNTfAgiatjGPACAE5ykCTfbqJzdqhoO76nw19ddQVSIjA830UIiJJcH-gHP2RJKBozQQCzDQngLHFErKwMZdGpfq9ysmok0pK7Wf3P4S6nOJkYs6Gkhl5KYBS7dQbCHUhLBJ9gvI_7eVFMg3eTROtSkl9Od10BGAY',
+        isCreator: false,
+      }
+    ],
+    facilityTags: ['大螢幕', 'WiFi', '可交談'],
+    mapUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuALhEkvuqGMcem0Dh6Wl5IT2f7xToBTt-tN51_cl4fAMLURwTJor9VJ_SAgTg_yUy78Ng5EXu-c3VJI4oKc0TVZDOLEe9-2qOlxGT-M9IOJpl9tiFrfUx-M6_7AACvE7Hn_HtLnf88Bt5LVmsYIUrGydUnVT22AZIBp2bMPn-V8nSBQxRSd4empK6oMR2nioWtsQEbKepYSjU-FRNw8ObzHdI8Ncf14Y6sHpRBoTlPlvrqRSA-UtsixbW5yMkWBllF670Mo3o-5Kh8L'
+  },
+  {
+    id: 'f3',
+    title: '微積分期中考搶救小隊',
+    category: '讀書研究',
+    categoryEmoji: '📚',
+    time: '明天 (10/25) 10:00 - 12:00',
+    location: '管理大樓 2F 靜音區',
+    buildingAddress: 'Management Building 2F, Silent Zone',
+    description: '期中考快到了，救救微積分！歡迎帶著課本和筆記一起來討論。目前進度到連鎖律與隱函數微分。不論是神人還是小白都歡迎一同激盪！',
+    maxParticipants: 4,
+    currentParticipants: 2,
+    members: [
+      {
+        name: '佳明',
+        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB1lzNG1OYqWr8746-7LTgbyDAgrTR4jADTERgStTl2tKyD1XLVQ5mkZyjHi1uhs2pKYRA6gi-k5dGyZdHTfNH8I58sqp8z3N2IlcrMsHoYSSN2X4CwqeZfVcGhfpVqYtwCSq6cw7Q-bnZ3Jf8B025m14jtLF0El1TMnGtpgnskOzE37oDkvwS6BQOi8ZPamFnCsAqUeidMvaghYLz6y33zC-C1KNnJmSwT-o_T7o38L4qJkQDhMqqLvkgKteYPEKtJH3uDdqBnhq4Q',
+        isCreator: true,
+      },
+      {
+        name: '怡婷',
+        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCoSFXnIjB0JUOsTLK87HEpJxHyUixSRFPfDrO0Tl6xz8zh5H39gEmp7ovCO3aVrZUf18AYBvPiOUOKEs6ahD5a_tyYbHlXq12TtDsijQqkzt1pkHwFht1KOKLx8AKJR3gLjc4rbJW_a4AWL6Z-7YmW8sa7dPoJqkCFnHXalk3_bR8lnGERHMv0fRdYURJE6si7EFRSpGAzUbcwv8qM_MtlALdNb6G-5yO9ukLkMl86ebLA4pBCTgM_3zrmcwSP5czGvi2C6-tDU687',
+        isCreator: false,
+      }
+    ],
+    facilityTags: ['供插座', '極致安靜', 'WiFi'],
+    mapUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuALhEkvuqGMcem0Dh6Wl5IT2f7xToBTt-tN51_cl4fAMLURwTJor9VJ_SAgTg_yUy78Ng5EXu-c3VJI4oKc0TVZDOLEe9-2qOlxGT-M9IOJpl9tiFrfUx-M6_7AACvE7Hn_HtLnf88Bt5LVmsYIUrGydUnVT22AZIBp2bMPn-V8nSBQxRSd4empK6oMR2nioWtsQEbKepYSjU-FRNw8ObzHdI8Ncf14Y6sHpRBoTlPlvrqRSA-UtsixbW5yMkWBllF670Mo3o-5Kh8L'
+  }
+];
+
+export const defaultNotifications: Notification[] = [
+  {
+    id: 'n1',
+    type: 'booking',
+    icon: 'calendar_today',
+    title: '預約成功！',
+    timeLabel: '5分鐘前',
+    text: '您已成功預約 世新圖書館 3F 靜音區，時間今天 14:00 - 16:00。',
+    isUnread: true,
+  },
+  {
+    id: 'n2',
+    type: 'group',
+    icon: 'groups',
+    title: '有新夥伴加入！',
+    timeLabel: '2小時前',
+    text: '有新夥伴阿強加入你的「馬利歐賽車」快閃揪團囉！快去打聲招呼吧！',
+    isUnread: true,
+  },
+  {
+    id: 'n3',
+    type: 'space',
+    icon: 'notifications_active',
+    title: '空間空位提醒',
+    timeLabel: '昨天',
+    text: '管院大樓 M101 現在有空位囉！空堂的你可以前往充電休息。',
+    isUnread: false,
+  },
+  {
+    id: 'n4',
+    type: 'system',
+    icon: 'auto_awesome',
+    title: '歡迎來到 SHU-Chill!',
+    timeLabel: '2天前',
+    text: '開始探索你的校園空堂伴侶吧，讓我們為你找到最舒適的放鬆角落。',
+    isUnread: false,
+  }
+];
+
+export const defaultChatHistory: ChatMessage[] = [
+  {
+    id: 'ch1',
+    groupId: 'f1',
+    sender: '小明',
+    senderAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDgMQWcdMeJXqgt2d7WwKKN9hXcFscgZ51YqoDVEGqMTQ74ei4CY18-TT-yHDLzU38ziqcImnKTWyDL9F4VVTl91NriJttKIW2jXUs_EHj0WicsnACqnMCkbS3i_hndoZSPqgLXB_JjiwN_K4GwswafllYOYkZ1mPypmzPYbzIKBJ7S9AXAfCtO4jKH7swLx8uLxw6NU1EdWRpTEn88iE26McXyMr5rwc35MaQ2GjHeAkJCscjNVWp98r06x38In4t8ZAmeGXNkEnWR',
+    isMe: false,
+    text: '我快到了，你們在哪？',
+    timestamp: '下午 1:45',
+  },
+  {
+    id: 'ch2',
+    groupId: 'f1',
+    sender: '阿強',
+    senderAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCZooWErYW0mIoxU3cpTPohcmT1Cr8ClR3CRRVu2xh5R1g0G9utrrHEusrBJ5JzkD8cIaXqn4o89DoPmpr92sLjzUXx3-g9TQgXaiWh_yDiNW7LzoErV8Zuuhjlaz8xVpVhcBqbwtpAly49YQh0nhqhCoxzFNrux2o5pIc723Kdq5A7UuZJME6kVxs1nL26001cyv8GI-HIlMiHcfxhga7TSeOAwHgjLNksSnZFAK2Dwn8koYBxi-Kq-RsnJomDFQ4l74YdCAsTqNSn',
+    isMe: false,
+    text: '在落地窗旁的沙發區！這裡位置很寬敞。',
+    timestamp: '下午 1:48',
+  },
+  {
+    id: 'ch3',
+    groupId: 'f1',
+    sender: '我',
+    senderAvatar: '',
+    isMe: true,
+    text: '我看到你們了～正在下樓梯中！',
+    timestamp: '下午 1:52',
+  },
+  {
+    id: 'ch4',
+    groupId: 'f1',
+    sender: '我',
+    senderAvatar: '',
+    isMe: true,
+    text: '等我 30 秒！🏎️💨',
+    timestamp: '下午 1:52',
+  }
+];

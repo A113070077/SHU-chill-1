@@ -1,0 +1,6 @@
+{
+  "name": "SHU-Chill世新空堂娛樂空間預約系統",
+  "description": "優化世新大學空間借用系統，建立行動優先的空堂娛樂空間預約平台。結合燈號地圖、時段預約、娛樂設備標籤、電子憑證與空堂快閃揪團功能。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
