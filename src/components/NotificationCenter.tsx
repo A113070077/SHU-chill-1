@@ -1,11 +1,12 @@
 import { Notification } from '../types';
-import { ArrowLeft, Bell, Users, CheckCircle2, Bookmark, Flame, Zap } from 'lucide-react';
+import { ArrowLeft, Bell, Users, CheckCircle2, Bookmark, Flame, Zap, X } from 'lucide-react';
 
 interface NotificationCenterProps {
   notifications: Notification[];
   onBack: () => void;
   onMarkAllRead: () => void;
   onClearNotification: (id: string) => void;
+  onClickNotification: (notification: Notification) => void;
 }
 
 export default function NotificationCenter({
@@ -13,6 +14,7 @@ export default function NotificationCenter({
   onBack,
   onMarkAllRead,
   onClearNotification,
+  onClickNotification,
 }: NotificationCenterProps) {
   
   const getIcon = (type: string) => {
@@ -94,8 +96,8 @@ export default function NotificationCenter({
               {notifications.map((notif) => (
                 <div 
                   key={notif.id}
-                  onClick={() => onClearNotification(notif.id)}
-                  className={`glass-card p-4 rounded-xl flex gap-3.5 items-start transition-all duration-200 cursor-pointer active:scale-[0.99] relative overflow-hidden group ${
+                  onClick={() => onClickNotification(notif)}
+                  className={`glass-card p-4 rounded-xl flex gap-3.5 items-start transition-all duration-200 cursor-pointer active:scale-[0.99] relative overflow-hidden group hover:bg-slate-50/80 ${
                     notif.isUnread ? 'bg-white border-l-4 border-l-[#00bfa5] shadow-md shadow-emerald-900/5' : 'bg-white/60 opacity-80'
                   }`}
                 >
@@ -103,12 +105,12 @@ export default function NotificationCenter({
                     {getIcon(notif.type)}
                   </div>
                   
-                  <div className="flex-grow space-y-1">
+                  <div className="flex-grow space-y-1 pr-5">
                     <div className="flex justify-between items-start">
                       <h3 className={`text-sm font-semibold transition-colors ${notif.isUnread ? 'text-slate-900' : 'text-slate-700'}`}>
                         {notif.title}
                       </h3>
-                      <span className="text-[10px] text-slate-400 font-medium">
+                      <span className="text-[10px] text-slate-400 font-medium whitespace-nowrap ml-2">
                         {notif.timeLabel}
                       </span>
                     </div>
@@ -124,6 +126,19 @@ export default function NotificationCenter({
                       </div>
                     )}
                   </div>
+
+                  {/* Manual Clear Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onClearNotification(notif.id);
+                    }}
+                    className="absolute right-2 top-2 w-6 h-6 rounded-full bg-slate-100 hover:bg-rose-50 text-slate-400 hover:text-rose-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all active:scale-90 cursor-pointer"
+                    title="移除通知"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               ))}
             </div>

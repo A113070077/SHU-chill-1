@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Share2, Heart, MapPin, Power, Tv, MessageSquare, Wifi, VolumeX, Calendar, Clock, Sparkles, Users } from 'lucide-react';
+import { ArrowLeft, Share2, Heart, MapPin, Power, Tv, MessageSquare, Wifi, VolumeX, Calendar, Clock, Sparkles, Users, Utensils } from 'lucide-react';
 import { Room } from '../types';
 
 interface RoomDetailScreenProps {
@@ -20,7 +20,7 @@ export default function RoomDetailScreen({
   onSwitchRoom,
 }: RoomDetailScreenProps) {
   const [duration, setDuration] = useState<number>(1);
-  const [startTime, setStartTime] = useState<string>('立即 14:00');
+  const [startTime, setStartTime] = useState<string>('上午 08:00');
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   // Find related spaces in the same building
@@ -37,11 +37,17 @@ export default function RoomDetailScreen({
   };
 
   const timeslots = [
-    { label: '立即', time: '14:00', available: true },
-    { label: '稍後', time: '15:00', available: true },
-    { label: '稍後', time: '16:00', available: true },
-    { label: '稍後', time: '17:00', available: true },
-    { label: '額滿', time: '18:00', available: false },
+    { label: '上午', time: '08:00', available: true },
+    { label: '上午', time: '09:00', available: true },
+    { label: '上午', time: '10:00', available: true },
+    { label: '上午', time: '11:00', available: true },
+    { label: '中午', time: '12:00', available: true },
+    { label: '下午', time: '13:00', available: true },
+    { label: '下午', time: '14:00', available: true },
+    { label: '下午', time: '15:00', available: true },
+    { label: '下午', time: '16:00', available: true },
+    { label: '下午', time: '17:00', available: true },
+    { label: '傍晚', time: '18:00', available: false },
   ];
 
   return (
@@ -176,31 +182,40 @@ export default function RoomDetailScreen({
               <span>大螢幕</span>
             </div>
 
-            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border ${
-              room.amenities.includes('可交談') || room.amenities.includes('WiFi')
-                ? 'bg-[#e6f2f0] border-emerald-100 text-[#006b5c]' 
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all ${
+              room.amenities.includes('可交談')
+                ? 'bg-amber-50 border-amber-200 text-amber-700 font-bold shadow-sm' 
                 : 'bg-slate-100/50 border-slate-100 text-slate-400 line-through opacity-70'
             }`}>
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>可交談</span>
+              <MessageSquare className="w-3.5 h-3.5 text-amber-600" />
+              <span>🗣️ 可交談/討論區</span>
             </div>
 
-            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border ${
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all ${
               room.amenities.includes('WiFi') 
-                ? 'bg-[#e6f2f0] border-emerald-100 text-[#006b5c]' 
+                ? 'bg-teal-50 border-teal-100 text-teal-700' 
                 : 'bg-slate-100/50 border-slate-100 text-slate-400 line-through opacity-70'
             }`}>
-              <Wifi className="w-3.5 h-3.5" />
+              <Wifi className="w-3.5 h-3.5 text-teal-600" />
               <span>Wi-Fi</span>
             </div>
 
-            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border ${
-              room.type === '靜音區'
-                ? 'bg-[#e6f2f0] border-emerald-100 text-[#006b5c]' 
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all ${
+              room.type === '靜音區' || room.amenities.includes('極致安靜')
+                ? 'bg-indigo-50 border-indigo-200 text-indigo-700 font-bold shadow-sm' 
                 : 'bg-slate-100/50 border-slate-100 text-slate-400 line-through opacity-70'
             }`}>
-              <VolumeX className="w-3.5 h-3.5" />
-              <span>極致安靜</span>
+              <VolumeX className="w-3.5 h-3.5 text-indigo-600" />
+              <span>🤫 極致安靜/自修區</span>
+            </div>
+
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border ${
+              room.allowFood 
+                ? 'bg-emerald-50 border-emerald-100 text-[#006b5c]' 
+                : 'bg-rose-50/50 border-rose-100 text-rose-500'
+            }`}>
+              <Utensils className="w-3.5 h-3.5" />
+              <span>{room.allowFood ? '開放飲食' : '禁止飲食'}</span>
             </div>
           </div>
         </div>
@@ -260,7 +275,7 @@ export default function RoomDetailScreen({
       {/* Sticky CTA Area */}
       <div className="fixed bottom-0 left-0 right-0 px-5 pt-3 pb-8 bg-gradient-to-t from-white via-white/95 to-transparent z-40 max-w-md mx-auto flex flex-col gap-3">
         <button 
-          onClick={() => onBook(room, duration, startTime.replace('立即 ', '').replace('稍後 ', ''))}
+          onClick={() => onBook(room, duration, startTime.split(' ').pop() || startTime)}
           className="w-full py-4 rounded-2xl bg-[#006b5c] hover:bg-[#004d42] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(0,107,92,0.3)] transition-all active:scale-[0.98]"
           id="confirm-booking-cta"
         >

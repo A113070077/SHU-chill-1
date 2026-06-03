@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Rocket, Plus, Minus, Info, HelpCircle } from 'lucide-react';
-import { FlashGroup, Room } from '../types';
+import { FlashGroup, Room, UserProfile } from '../types';
 
 interface CreateGroupScreenProps {
   rooms: Room[];
   preselectedRoom?: Room;
+  currentUser: UserProfile;
   onCreateGroup: (group: FlashGroup) => void;
   onBack: () => void;
 }
@@ -12,6 +13,7 @@ interface CreateGroupScreenProps {
 export default function CreateGroupScreen({
   rooms,
   preselectedRoom,
+  currentUser,
   onCreateGroup,
   onBack,
 }: CreateGroupScreenProps) {
@@ -64,8 +66,8 @@ export default function CreateGroupScreen({
       currentParticipants: 1, // Currently just the creator
       members: [
         {
-          name: '小明',
-          avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6QHzNaFVmiL91e8_zSpatNfRjTfg0NKS3zWR0KZXVGEVmltl2k1Tw_tHHCdRVgclufqe9-inbAJ5W2gffr9KxOMyAIGEL5w7vnJkz1w-90k1mtq7TmE3bv0-9mbO4sDiSD-bmi5d7jQtYN5YAeM9yQXyat8j7722HXaNzrBBEMbL1ltZCY8kt08k2nV4-Ss7Dgaot_rmqxhpkGHDNLupOoldm7VfHVXeslUich9i_lRYBUYKRA7zxC4qHFVJJm5wrzQYX7YN_QOkR',
+          name: currentUser.nickname,
+          avatarUrl: currentUser.avatarUrl,
           isCreator: true,
         }
       ],

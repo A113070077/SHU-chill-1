@@ -13,6 +13,7 @@ export interface Room {
   nextAvailableTime?: string; // e.g., "14:00"
   imageUrl: string;
   description: string;
+  allowFood?: boolean;
 }
 
 export interface Booking {
@@ -68,6 +69,7 @@ export interface Notification {
   timeLabel: string; // e.g., "5m ago", "Yesterday"
   text: string;
   isUnread: boolean;
+  relatedId?: string;
 }
 
 export interface UserProfile {

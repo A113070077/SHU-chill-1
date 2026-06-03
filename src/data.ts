@@ -23,6 +23,7 @@ export const presetRooms: Room[] = [
     nextAvailableTime: '立即',
     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnbTBNbCeZZtlbSbHvST3KSfXvyOPtj0MbiPUbeBA1WN5VBmJ8iohGI1foB4xCqL6QylU4VG6RL5QaOznbsvEvtNFsJPIlazlfvkgBgfj2JFEOycShUUEYhy2GRI0fLP3Vp4RWyxQJJ69qZAMvW1su_6Eddhdp8Gw4AeNXBilS1PBWcNuGhopBp1-b0GR2P0AVSTmhKDd185m3UU5KdpLciRPyltoM1I2urJPzrsUquvNiGqKkit1tc_GasNwm4LW_EWiPA_gVG-hV',
     description: '明亮且富有現代感的空間。大片落地窗提供充足光線，並配有舒適座椅及大白板，非常適合小組創意討論。',
+    allowFood: false,
   },
   {
     id: 's204',
@@ -36,6 +37,7 @@ export const presetRooms: Room[] = [
     amenities: ['插座', 'WiFi'],
     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnbTBNbCeZZtlbSbHvST3KSfXvyOPtj0MbiPUbeBA1WN5VBmJ8iohGI1foB4xCqL6QylU4VG6RL5QaOznbsvEvtNFsJPIlazlfvkgBgfj2JFEOycShUUEYhy2GRI0fLP3Vp4RWyxQJJ69qZAMvW1su_6Eddhdp8Gw4AeNXBilS1PBWcNuGhopBp1-b0GR2P0AVSTmhKDd185m3UU5KdpLciRPyltoM1I2urJPzrsUquvNiGqKkit1tc_GasNwm4LW_EWiPA_gVG-hV',
     description: '極致寧靜的個人自習與閱讀空間，提供寬敞桌面、獨立護眼檯燈，以及一對一獨立插座。本區全時段限制音量，請勿交談。',
+    allowFood: false,
   },
   {
     id: 'm101',
@@ -50,6 +52,7 @@ export const presetRooms: Room[] = [
     nextAvailableTime: '14:00',
     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFePocRNo4UXvYETsyQHWEtBDR5SE6LwLtq7b3tcW0gbVCA3bUu-BrbEg1lX-URXyJpv54hG2nIKAqCaT9K8lJ_UvlzjRT_okE5Q_zjb_DA0-d3DP2rbQjRq-eqTvb2hRMOPsTBEutmYL4mWdXRgNQSZf_8a02iSSTCPuiROwEnDIS4GbSGqP-RCLoisA9ggBrXEuo_FXFTRNHZ8yLHGJcD0UvicoIKj6LHrVD3buzFcbwGSL5OiQmE2me9jRN7gQWW2TYd3w7pFln',
     description: '世新大學管理學院1樓的熱門討論空間，配備多功能充電專區及寬頻無線網路。',
+    allowFood: false,
   },
   {
     id: 'm_sofa',
@@ -63,6 +66,7 @@ export const presetRooms: Room[] = [
     amenities: ['舒適沙發', '可飲食'],
     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFePocRNo4UXvYETsyQHWEtBDR5SE6LwLtq7b3tcW0gbVCA3bUu-BrbEg1lX-URXyJpv54hG2nIKAqCaT9K8lJ_UvlzjRT_okE5Q_zjb_DA0-d3DP2rbQjRq-eqTvb2hRMOPsTBEutmYL4mWdXRgNQSZf_8a02iSSTCPuiROwEnDIS4GbSGqP-RCLoisA9ggBrXEuo_FXFTRNHZ8yLHGJcD0UvicoIKj6LHrVD3buzFcbwGSL5OiQmE2me9jRN7gQWW2TYd3w7pFln',
     description: '輕鬆隨意的開放式沙發座位區，可與同學在此放鬆、玩手遊或吃東西，現場人潮適中（約65%）。',
+    allowFood: true,
   },
   {
     id: 'lib_silent',
@@ -76,6 +80,7 @@ export const presetRooms: Room[] = [
     amenities: ['插座', '大螢幕', 'WiFi'],
     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDW2OUACN4zuu1eyhrlWWK6BGdiDN0IKv6-e0ekk9HxyDNWyuT2qp0LF9RCRKxge7q4xZBTMQPCrZC15MrhFapza3qh9rGhgrXXVdFS5RlxreUcCFOUvVWspafhH3wuMPCj56QoGwUXC99AJEgussh7z1Z5ZyKfmGVSN4YjXtNhAGKHBE74ZBQAXbCIBKz_i9xE4tQ_gcA7o9L2TvH6i0_RV_0k2KPvk1l1K16r8RPP_NzgznIZTMMShHVOi2BGUVVqKnCc3WUEFK-b',
     description: '位於圖書館3樓，極度安靜的單人座位區，座位旁均附有專用插座與隔板，讓你心無旁騖享受個人閱讀時光。',
+    allowFood: false,
   },
   {
     id: 'lib_b1',
@@ -89,6 +94,7 @@ export const presetRooms: Room[] = [
     amenities: ['插座', 'WiFi', '大螢幕', '可交談'],
     imageUrl: 'https://lh3.googleusercontent.com/AB6AXuDnjgKCBLEHK2EEcy_ubKOi7pIpRnDQtKIEnewJfmQ4GxmSc1-0x4OleNEGwkUiIjscCUehzaPrxoqdZlEEvzC5YCN_mMHmyRXKgyn4MdKmcnJzLC5eFa8KYGRrt_JAN9JiHCS4hmtuQVClA_4Vmt-oxwh7IvaM-mrQmrAG9YoptuJO9S6TtgaIBMTn9lApJo2rZSILaYMVYo34fYBSw25HQXROqZ6xVWxkcM7sX_0sEgW-RPKNU5Q8IyV66XZ2Qqh5SUjFJ5WTPeXd',
     description: '寬敞的多功能小組討論空間，備有高解析度顯示器。本區域不提供飲食，請保持潔淨。',
+    allowFood: false,
   },
   {
     id: 'comm_3f',
@@ -102,6 +108,7 @@ export const presetRooms: Room[] = [
     amenities: ['WiFi', '可飲食', '舒適沙發'],
     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBGmoSvptHQOiYlQDnbGQkjcD7rSj9E3Z8nNhv6b2kTApUzG5HjW-_R03atiklpeJNciW1z1Aj_lex_RvlLVcFbdGqCL396LG2OfbBJLv2w-OZ4IVkS-4kMdz-0SxKhGaGR2QCCjzDFSGb2iHEwI4rww8RPav0iBQlTYtz_acE74qxNBPOZOB8_gdB2quJ62l31VmUOjymXIOn5cryogf-7050IkceLJBEPWNCHHq39GWoc2Tm1HM6OXljSUpEG1CH-MhzjOnngBpaW',
     description: '世新大學傳播大廈3樓的熱鬧活動交誼廳。同學們常在此聚會、玩掌機、分享課後點滴。',
+    allowFood: true,
   }
 ];
 
@@ -245,6 +252,7 @@ export const defaultNotifications: Notification[] = [
     timeLabel: '5分鐘前',
     text: '您已成功預約 世新圖書館 3F 靜音區，時間今天 14:00 - 16:00。',
     isUnread: true,
+    relatedId: 'lib_silent',
   },
   {
     id: 'n2',
@@ -254,6 +262,7 @@ export const defaultNotifications: Notification[] = [
     timeLabel: '2小時前',
     text: '有新夥伴阿強加入你的「馬利歐賽車」快閃揪團囉！快去打聲招呼吧！',
     isUnread: true,
+    relatedId: 'f1',
   },
   {
     id: 'n3',
@@ -263,6 +272,7 @@ export const defaultNotifications: Notification[] = [
     timeLabel: '昨天',
     text: '管院大樓 M101 現在有空位囉！空堂的你可以前往充電休息。',
     isUnread: false,
+    relatedId: 'm101',
   },
   {
     id: 'n4',

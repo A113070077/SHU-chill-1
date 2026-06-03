@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, MapPin, Calendar, Clock, BookOpen, Users, Power, VolumeX, Wifi, Zap, User, Star } from 'lucide-react';
+import { ArrowLeft, MapPin, Calendar, Clock, BookOpen, Users, Power, VolumeX, Wifi, Zap, User, Star, MessageSquare } from 'lucide-react';
 import { FlashGroup } from '../types';
 
 interface GroupDetailScreenProps {
@@ -17,7 +17,9 @@ export default function GroupDetailScreen({
   onJoin,
   onNavigateToChat,
 }: GroupDetailScreenProps) {
-  const [joined, setJoined] = useState<boolean>(false);
+  const [joined, setJoined] = useState<boolean>(() => {
+    return group.members.some(m => m.name === currentUserNickname);
+  });
   const [joining, setJoining] = useState<boolean>(false);
 
   const handleJoinClick = () => {
@@ -148,14 +150,28 @@ export default function GroupDetailScreen({
         <div>
           <h3 className="text-xs font-bold text-slate-400 uppercase mb-2 pl-1">場地設備</h3>
           <div className="flex flex-wrap gap-2">
-            {group.facilityTags.map((tag) => (
-              <div key={tag} className="flex items-center px-4 py-2 rounded-xl bg-white border border-slate-100 text-slate-700 font-bold text-xs shadow-sm">
-                {tag.includes('插座') && <Power className="w-4 h-4 text-[#006b5c] mr-2" />}
-                {tag.includes('安靜') && <VolumeX className="w-4 h-4 text-[#006b5c] mr-2" />}
-                {tag.includes('WiFi') && <Wifi className="w-4 h-4 text-[#006b5c] mr-2" />}
-                <span>{tag}</span>
-              </div>
-            ))}
+            {group.facilityTags.map((tag) => {
+              const isQuiet = tag.includes('安靜');
+              const isTalk = tag.includes('交談');
+              return (
+                <div 
+                  key={tag} 
+                  className={`flex items-center px-4 py-2 rounded-xl border text-xs font-bold shadow-sm transition-all ${
+                    isQuiet 
+                      ? 'bg-indigo-50 border-indigo-200 text-indigo-700' 
+                      : isTalk 
+                        ? 'bg-amber-50 border-amber-200 text-amber-700' 
+                        : 'bg-white border-slate-100 text-slate-700'
+                  }`}
+                >
+                  {tag.includes('插座') && <Power className="w-4 h-4 text-[#006b5c] mr-2" />}
+                  {isQuiet && <VolumeX className="w-4 h-4 text-indigo-600 mr-2" />}
+                  {isTalk && <MessageSquare className="w-4 h-4 text-amber-600 mr-2" />}
+                  {tag.includes('WiFi') && <Wifi className="w-4 h-4 text-teal-600 mr-2" />}
+                  <span>{tag === '極致安靜' ? '🤫 極致安靜' : tag === '可交談' ? '🗣️ 可交談' : tag}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
